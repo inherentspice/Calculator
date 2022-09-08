@@ -3,7 +3,7 @@ function operate(operator, number1, number2) {
     return number1 + number2;
   } else if (operator==='-') {
     return number1 - number2;
-  } else if (operator==='*') {
+  } else if (operator==='x') {
     return number1 * number2;
   } else if (operator==='/') {
     return number1 / number2;
@@ -22,12 +22,19 @@ buttons.forEach(button => button.addEventListener('click', function() {
     operator = button.innerText;
   } else if (button.className==='number' && !number1) {
     number1 = button.innerText;
-  } else if (button.className==='number' && number1) {
+    console.log(number1)
+  } else if (button.className==='number' && !operator) {
+    number1 += button.innerText;
+    console.log(number1)
+  } else if (button.className==='number' && operator && !number2) {
     number2 = button.innerText;
+  } else if (button.className==='number' && operator && number2) {
+    number2 += button.innerText;
   } else if (button.className==='equals' && number1 && number2 && operator) {
     answer = operate(operator, number1, number2);
     console.log(answer)
     number1 = answer;
+    console.log(number1)
     operator = null;
     number2 = null;
   } else if (button.className==='clear') {
