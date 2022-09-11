@@ -48,6 +48,16 @@ function addDecimal() {
   }
 };
 
+function deletePrevious() {
+  if (number1 && !operator) {
+    number1 = number1.substring(0, number1.length - 1);
+  } else if (operator && !number2) {
+    operator = null;
+  } else {
+    number2 = number2.substring(0, number2.length - 1);
+  }
+};
+
 let buttons = document.querySelectorAll('button')
 let operator = null;
 let number1 = null;
@@ -83,7 +93,9 @@ buttons.forEach(button => button.addEventListener('click', function() {
     number2 = null;
     answer = null;
   } else if (button.className==='decimal') {
-    addDecimal()
+    addDecimal();
+  } else if (button.className==='backspace') {
+    deletePrevious();
   }
 
   updateScreen();
