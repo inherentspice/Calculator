@@ -39,7 +39,13 @@ let answer = null;
 
 
 buttons.forEach(button => button.addEventListener('click', function() {
-  if (button.className==='operator') {
+  if (button.className==='operator' && number1 && number2 && operator) {
+    answer = operate(operator, number1, number2);
+    console.log(answer)
+    number1 = answer;
+    operator = button.innerText;
+    number2 = null;
+  } else if (button.className==='operator') {
     operator = button.innerText;
   } else if (button.className==='number' && !number1) {
     number1 = button.innerText;
