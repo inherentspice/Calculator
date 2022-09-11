@@ -1,6 +1,6 @@
 function operate(operator, number1, number2) {
   if (operator==='+') {
-    return parseInt(number1) + parseInt(number2);
+    return parseFloat(number1) + parseFloat(number2);
   } else if (operator==='-') {
     return number1 - number2;
   } else if (operator==='x') {
@@ -37,6 +37,17 @@ function updateScreen() {
   screenUpdate.appendChild(screenDisplay);
 };
 
+function addDecimal() {
+  if ((number1 || number1===0) && !operator) {
+    number1 += '.';
+  } else if (!number2){
+    number2 = 0;
+    number2 += '.';
+  } else {
+    number2 += '.';
+  }
+};
+
 let buttons = document.querySelectorAll('button')
 let operator = null;
 let number1 = null;
@@ -71,6 +82,8 @@ buttons.forEach(button => button.addEventListener('click', function() {
     number1 = 0;
     number2 = null;
     answer = null;
+  } else if (button.className==='decimal') {
+    addDecimal()
   }
 
   updateScreen();
