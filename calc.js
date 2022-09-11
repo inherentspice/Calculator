@@ -63,6 +63,10 @@ let operator = null;
 let number1 = null;
 let number2 = null;
 let answer = null;
+const operatorKeys = {'plus': '+',
+                      'minus': '-',
+                      'divide': '/',
+                      'multiply': 'x'}
 
 
 buttons.forEach(button => button.addEventListener('click', function() {
@@ -99,4 +103,36 @@ buttons.forEach(button => button.addEventListener('click', function() {
   }
 
   updateScreen();
-}))
+}));
+
+document.addEventListener('keydown', (e) => {
+  let name = e.key;
+
+  if (Object.values(operatorKeys).indexOf(name) > -1 && number1 && number2) {
+    answer = operate(operator, number1, number2);
+    number1 = answer;
+    operator = name;
+    number2 = null;
+  } else if (Object.values(operatorKeys).indexOf(name) > -1) {
+    operator = name;
+  } else if (isFinite(name) && !number1) {
+    number1 = name;
+  } else if (isFinite(name) && !operator) {
+    number1 += name;
+  } else if (isFinite(name) && operator && !number2) {
+    number2 = name;
+  } else if (isFinite(name) && operator && number2) {
+    number2 += name;
+  } else if (name==='Enter' && number1 && number2 && operator) {
+    answer = operate(operator, number1, number2);
+    number1 = answer;
+    operator = null;
+    number2 = null;
+  } else if (name==='.') {
+    addDecimal();
+  } else if (name==='Backspace') {
+    deletePrevious();
+  };
+
+  updateScreen();
+});
