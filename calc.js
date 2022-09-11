@@ -6,7 +6,13 @@ function operate(operator, number1, number2) {
   } else if (operator==='x') {
     return number1 * number2;
   } else if (operator==='/') {
-    return number1 / number2;
+    if (number2==='0') {
+      window.alert('Nope')
+      return 0
+    } else {
+      console.log(number2)
+      return number1 / number2;
+    };
   } else {
     return 'nope';
   }
@@ -39,9 +45,8 @@ let answer = null;
 
 
 buttons.forEach(button => button.addEventListener('click', function() {
-  if (button.className==='operator' && number1 && number2 && operator) {
+  if (button.className==='operator'  && number1 && number2) {
     answer = operate(operator, number1, number2);
-    console.log(answer)
     number1 = answer;
     operator = button.innerText;
     number2 = null;
@@ -63,9 +68,10 @@ buttons.forEach(button => button.addEventListener('click', function() {
     number2 = null;
   } else if (button.className==='clear') {
     operator = null;
-    number1 = null;
+    number1 = 0;
     number2 = null;
     answer = null;
   }
+
   updateScreen();
 }))
