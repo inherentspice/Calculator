@@ -1,6 +1,6 @@
 function operate(operator, number1, number2) {
   if (operator==='+') {
-    return number1 + number2;
+    return parseInt(number1) + parseInt(number2);
   } else if (operator==='-') {
     return number1 - number2;
   } else if (operator==='x') {
@@ -13,8 +13,14 @@ function operate(operator, number1, number2) {
 }
 
 function updateScreen() {
-  screenUpdate = document.getElementById('screen');
-  screenDisplay = document.createElement('p');
+  let screenUpdate = document.getElementById('screen');
+  let screenDisplay;
+
+  if (screenUpdate.hasChildNodes()) {
+    screenDisplay = screenUpdate.firstChild;
+  } else {
+    screenDisplay = document.createElement('p');
+  }
   if (operator && number2) {
     screenDisplay.innerText = `${number1} ${operator} ${number2}`;
   } else if (operator && !number2) {
@@ -45,6 +51,7 @@ buttons.forEach(button => button.addEventListener('click', function() {
     number2 += button.innerText;
   } else if (button.className==='equals' && number1 && number2 && operator) {
     answer = operate(operator, number1, number2);
+    console.log(answer)
     number1 = answer;
     operator = null;
     number2 = null;
