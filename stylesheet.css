@@ -5,6 +5,8 @@
   --rotation: 100;
   --hue-variant-1: calc(var(--base-hue) + var(--rotation));
   --hue-variant-2: calc(var(--base-hue) + var(--rotation) * 2);
+  --color-pink-1: rgb(253, 107, 131);
+  --color-pink-2: rgb(250, 161, 176);
 }
 
 .color {
@@ -22,6 +24,9 @@
   --hue: var(--hue-variant-1);
   height: max(700px, 70vh);
   display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .footer {
@@ -31,16 +36,40 @@
 }
 
 .calculator {
-  width: 30vw;
+  width: 50vw;
+  display: flex;
+  flex-flow: wrap;
+  gap: 1.5rem;
+  border: 20px solid var(--color-pink-1);
+  background-color: hsl(var(--base-hue), 95%, 95%);
+  border-radius: 20%;
+  padding: 3rem;
+  justify-content: space-evenly;
+  box-shadow: 20px 20px 4px 2px var(--color-pink-2);
+
 }
 
 #screen {
-  background-color: black;
+  background-color: rgb(34, 34, 34);
   padding: 0;
   margin: 0;
+  height: 3rem;
+  width: 100%;
   color: white;
+  border: 10px solid var(--color-pink-1);
 }
+
 button {
-  min-height: 7rem;
+  min-height: 5rem;
   min-width: 7rem;
+  padding: 1rem;
+  border-radius: 20%;
+}
+
+button.backspace {
+  min-width: 14rem;
+}
+
+button.equals {
+  min-width: 14rem;
 }
