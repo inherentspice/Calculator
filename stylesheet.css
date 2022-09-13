@@ -1,3 +1,25 @@
-body {
-  background-color: rgb(255, 192, 203);
+:root {
+  --base-hue: 351;
+  --saturation: 77%;
+  --lightness: 92%;
+  --rotation: 60;
+}
+
+.color {
+  background-color: hsl(var(--hue), var(--saturation), var(--lightness));
+}
+
+.header {
+  width: 100vw;
+  --hue: calc(var(--base-hue))
+}
+
+.main {
+  width: 100vw;
+  --hue: calc(var(--base-hue) + var(--rotation));
+}
+
+.footer {
+  width: 100vw;
+  --hue: calc(var(--base-hue) + var(--rotation) * 2);
 }
