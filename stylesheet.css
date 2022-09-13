@@ -1,3 +1,75 @@
-body {
-  background-color: rgb(255, 192, 203);
+:root {
+  --base-hue: 351;
+  --saturation: 77%;
+  --lightness: 92%;
+  --rotation: 100;
+  --hue-variant-1: calc(var(--base-hue) + var(--rotation));
+  --hue-variant-2: calc(var(--base-hue) + var(--rotation) * 2);
+  --color-pink-1: rgb(253, 107, 131);
+  --color-pink-2: rgb(250, 161, 176);
+}
+
+.color {
+  background-color: hsl(var(--hue), var(--saturation), var(--lightness));
+}
+
+.header {
+  width: 100vw;
+  height: max(200px, 15vh);
+  --hue: calc(var(--base-hue))
+}
+
+.main {
+  width: 100vw;
+  --hue: var(--hue-variant-1);
+  height: max(700px, 70vh);
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.footer {
+  width: 100vw;
+  --hue: var(--hue-variant-2);
+  height: 20px;
+}
+
+.calculator {
+  width: 50vw;
+  display: flex;
+  flex-flow: wrap;
+  gap: 1.5rem;
+  border: 20px solid var(--color-pink-1);
+  background-color: hsl(var(--base-hue), 95%, 95%);
+  border-radius: 20%;
+  padding: 3rem;
+  justify-content: space-evenly;
+  box-shadow: 20px 20px 4px 2px var(--color-pink-2);
+
+}
+
+#screen {
+  background-color: rgb(34, 34, 34);
+  padding: 0;
+  margin: 0;
+  height: 3rem;
+  width: 100%;
+  color: white;
+  border: 10px solid var(--color-pink-1);
+}
+
+button {
+  min-height: 5rem;
+  min-width: 7rem;
+  padding: 1rem;
+  border-radius: 20%;
+}
+
+button.backspace {
+  min-width: 14rem;
+}
+
+button.equals {
+  min-width: 14rem;
 }
