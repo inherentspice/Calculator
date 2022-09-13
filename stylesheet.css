@@ -7,6 +7,14 @@
   --hue-variant-2: calc(var(--base-hue) + var(--rotation) * 2);
   --color-pink-1: rgb(253, 107, 131);
   --color-pink-2: rgb(250, 161, 176);
+  --color-white: white;
+
+}
+
+body {
+  font-family: 'Sofia', cursive;
+  margin: 0;
+  padding: 0;
 }
 
 .color {
@@ -16,7 +24,12 @@
 .header {
   width: 100vw;
   height: max(200px, 15vh);
-  --hue: calc(var(--base-hue))
+  --hue: calc(var(--base-hue));
+  background-image: url('images/logos.png');
+  background-repeat: space;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main {
@@ -32,20 +45,22 @@
 .footer {
   width: 100vw;
   --hue: var(--hue-variant-2);
-  height: 20px;
 }
 
 .calculator {
-  width: 50vw;
+  width: 40vw;
   display: flex;
   flex-flow: wrap;
-  gap: 1.5rem;
+  gap: 1.2rem;
   border: 20px solid var(--color-pink-1);
   background-color: hsl(var(--base-hue), 95%, 95%);
   border-radius: 20%;
   padding: 3rem;
   justify-content: space-evenly;
   box-shadow: 20px 20px 4px 2px var(--color-pink-2);
+  max-height: min(80%, 700px);
+  margin-bottom: 2rem;
+  align-content: center;
 
 }
 
@@ -63,7 +78,11 @@ button {
   min-height: 5rem;
   min-width: 7rem;
   padding: 1rem;
-  border-radius: 20%;
+  border-radius: 10%;
+  background-color: var(--color-white);
+  box-shadow: 2px 2px 1px 1px rgba(252, 252, 241, 0.815);
+  font-family: 'Sofia', cursive;
+  font-size: 1.5rem;
 }
 
 button.backspace {
@@ -72,4 +91,9 @@ button.backspace {
 
 button.equals {
   min-width: 14rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
 }
