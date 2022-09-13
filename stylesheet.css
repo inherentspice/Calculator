@@ -2,7 +2,9 @@
   --base-hue: 351;
   --saturation: 77%;
   --lightness: 92%;
-  --rotation: 60;
+  --rotation: 100;
+  --hue-variant-1: calc(var(--base-hue) + var(--rotation));
+  --hue-variant-2: calc(var(--base-hue) + var(--rotation) * 2);
 }
 
 .color {
@@ -11,15 +13,34 @@
 
 .header {
   width: 100vw;
+  height: max(200px, 15vh);
   --hue: calc(var(--base-hue))
 }
 
 .main {
   width: 100vw;
-  --hue: calc(var(--base-hue) + var(--rotation));
+  --hue: var(--hue-variant-1);
+  height: max(700px, 70vh);
+  display: flex;
 }
 
 .footer {
   width: 100vw;
-  --hue: calc(var(--base-hue) + var(--rotation) * 2);
+  --hue: var(--hue-variant-2);
+  height: 20px;
+}
+
+.calculator {
+  width: 30vw;
+}
+
+#screen {
+  background-color: black;
+  padding: 0;
+  margin: 0;
+  color: white;
+}
+button {
+  min-height: 7rem;
+  min-width: 7rem;
 }
