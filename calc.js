@@ -93,30 +93,29 @@ buttons.forEach(button => button.addEventListener('click', function() {
     number1 = answer;
     operator = button.innerText;
     number2 = null;
-  } else if (button.className==='operator') {
+  } else if (button.classList.contains('operator')) {
     operator = button.innerText;
-  } else if (button.className==='number' && !number1) {
+  } else if (button.classList.contains('number') && !number1) {
     number1 = button.innerText;
-  } else if (button.className==='number' && !operator) {
+  } else if (button.classList.contains('number') && !operator) {
     number1 += button.innerText;
-  } else if (button.className==='number' && operator && !number2) {
+  } else if (button.classList.contains('number') && operator && !number2) {
     number2 = button.innerText;
-  } else if (button.className==='number' && operator && number2) {
+  } else if (button.classList.contains('number') && operator && number2) {
     number2 += button.innerText;
-  } else if (button.className==='equals' && number1 && number2 && operator) {
+  } else if (button.classList.contains('equals') && number1 && number2 && operator) {
     answer = operate(operator, number1, number2);
-    console.log(answer)
     number1 = answer;
     operator = null;
     number2 = null;
-  } else if (button.className==='clear') {
+  } else if (button.classList.contains('clear')) {
     operator = null;
     number1 = 0;
     number2 = null;
     answer = null;
-  } else if (button.className==='decimal') {
+  } else if (button.classList.contains('decimal')) {
     addDecimal();
-  } else if (button.className==='backspace') {
+  } else if (button.classList.contains('backspace')) {
     deletePrevious();
   }
   buttonAnimation(this.id);
