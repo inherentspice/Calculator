@@ -3,7 +3,7 @@ function operate(operator, number1, number2) {
     return parseFloat(number1) + parseFloat(number2);
   } else if (operator==='-') {
     return number1 - number2;
-  } else if (operator==='x') {
+  } else if (operator==='x' || operator==='*') {
     return number1 * number2;
   } else if (operator==='/') {
     if (number2==='0') {
@@ -58,15 +58,33 @@ function deletePrevious() {
   }
 };
 
+function buttonAnimation(btn) {
+  console.log(btn)
+  if (isFinite(btn) || Object.values(operatorKeys).indexOf(btn) > -1 || Object.values(miscButtons).indexOf(btn) > -1) {
+    let activeButton = document.querySelectorAll('.active');
+    activeButton[0].className = activeButton[0].className.replace('active', '');
+    btnSelected = document.getElementById(btn);
+    btnSelected.className += ' active';
+  }
+}
+
+
 let buttons = document.querySelectorAll('button')
 let operator = null;
-let number1 = null;
-let number2 = null;
+let number1 = 0;
+let number2 = 0;
 let answer = null;
 const operatorKeys = {'plus': '+',
                       'minus': '-',
                       'divide': '/',
-                      'multiply': 'x'}
+                      'multiply': '*'};
+
+
+const miscButtons = {'decimal': '.',
+                      'enter': 'Enter',
+                      'backspace': 'Backspace',
+                      'clear': 'clear'};
+
 
 
 buttons.forEach(button => button.addEventListener('click', function() {
@@ -101,13 +119,13 @@ buttons.forEach(button => button.addEventListener('click', function() {
   } else if (button.className==='backspace') {
     deletePrevious();
   }
-
+  buttonAnimation(this.id);
   updateScreen();
 }));
 
 document.addEventListener('keydown', (e) => {
   let name = e.key;
-
+  buttonAnimation(name);
   if (Object.values(operatorKeys).indexOf(name) > -1 && number1 && number2) {
     answer = operate(operator, number1, number2);
     number1 = answer;
