@@ -3,7 +3,7 @@ function operate(operator, number1, number2) {
     return parseFloat(number1) + parseFloat(number2);
   } else if (operator==='-') {
     return number1 - number2;
-  } else if (operator==='x') {
+  } else if (operator==='x' || operator==='*') {
     return number1 * number2;
   } else if (operator==='/') {
     if (number2==='0') {
@@ -58,15 +58,33 @@ function deletePrevious() {
   }
 };
 
+function buttonAnimation(btn) {
+  console.log(btn)
+  if (isFinite(btn) || Object.values(operatorKeys).indexOf(btn) > -1 || Object.values(miscButtons).indexOf(btn) > -1) {
+    let activeButton = document.querySelectorAll('.active');
+    activeButton[0].className = activeButton[0].className.replace('active', '');
+    btnSelected = document.getElementById(btn);
+    btnSelected.className += ' active';
+  }
+}
+
+
 let buttons = document.querySelectorAll('button')
 let operator = null;
-let number1 = null;
-let number2 = null;
+let number1 = 0;
+let number2 = 0;
 let answer = null;
 const operatorKeys = {'plus': '+',
                       'minus': '-',
                       'divide': '/',
-                      'multiply': 'x'}
+                      'multiply': '*'};
+
+
+const miscButtons = {'decimal': '.',
+                      'enter': 'Enter',
+                      'backspace': 'Backspace',
+                      'clear': 'clear'};
+
 
 
 buttons.forEach(button => button.addEventListener('click', function() {
@@ -75,39 +93,38 @@ buttons.forEach(button => button.addEventListener('click', function() {
     number1 = answer;
     operator = button.innerText;
     number2 = null;
-  } else if (button.className==='operator') {
+  } else if (button.classList.contains('operator')) {
     operator = button.innerText;
-  } else if (button.className==='number' && !number1) {
+  } else if (button.classList.contains('number') && !number1) {
     number1 = button.innerText;
-  } else if (button.className==='number' && !operator) {
+  } else if (button.classList.contains('number') && !operator) {
     number1 += button.innerText;
-  } else if (button.className==='number' && operator && !number2) {
+  } else if (button.classList.contains('number') && operator && !number2) {
     number2 = button.innerText;
-  } else if (button.className==='number' && operator && number2) {
+  } else if (button.classList.contains('number') && operator && number2) {
     number2 += button.innerText;
-  } else if (button.className==='equals' && number1 && number2 && operator) {
+  } else if (button.classList.contains('equals') && number1 && number2 && operator) {
     answer = operate(operator, number1, number2);
-    console.log(answer)
     number1 = answer;
     operator = null;
     number2 = null;
-  } else if (button.className==='clear') {
+  } else if (button.classList.contains('clear')) {
     operator = null;
     number1 = 0;
     number2 = null;
     answer = null;
-  } else if (button.className==='decimal') {
+  } else if (button.classList.contains('decimal')) {
     addDecimal();
-  } else if (button.className==='backspace') {
+  } else if (button.classList.contains('backspace')) {
     deletePrevious();
   }
-
+  buttonAnimation(this.id);
   updateScreen();
 }));
 
 document.addEventListener('keydown', (e) => {
   let name = e.key;
-
+  buttonAnimation(name);
   if (Object.values(operatorKeys).indexOf(name) > -1 && number1 && number2) {
     answer = operate(operator, number1, number2);
     number1 = answer;
