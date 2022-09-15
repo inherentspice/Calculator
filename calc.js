@@ -1,4 +1,6 @@
 function operate(operator, number1, number2) {
+  number1 = parseFloat(number1).toFixed(2);
+  number2 = parseFloat(number2).toFixed(2);
   if (operator==='+') {
     return parseFloat(number1) + parseFloat(number2);
   } else if (operator==='-') {
@@ -10,11 +12,8 @@ function operate(operator, number1, number2) {
       window.alert('Nope')
       return 0
     } else {
-      console.log(number2)
       return number1 / number2;
     };
-  } else {
-    return 'nope';
   }
 }
 
@@ -39,12 +38,16 @@ function updateScreen() {
 
 function addDecimal() {
   if ((number1 || number1===0) && !operator) {
+    if (number1.indexOf('.') === -1) {
     number1 += '.';
+    }
   } else if (!number2){
     number2 = 0;
     number2 += '.';
   } else {
+    if (number2.indexOf('.') === -1) {
     number2 += '.';
+    }
   }
 };
 
@@ -59,7 +62,6 @@ function deletePrevious() {
 };
 
 function buttonAnimation(btn) {
-  console.log(btn)
   if (isFinite(btn) || Object.values(operatorKeys).indexOf(btn) > -1 || Object.values(miscButtons).indexOf(btn) > -1) {
     let activeButton = document.querySelectorAll('.active');
     activeButton[0].className = activeButton[0].className.replace('active', '');
